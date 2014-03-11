@@ -5,7 +5,6 @@
  * Copyright 2013, MIT License
  *
 */
-
 function Swipe(container, options) {
 
   "use strict";
@@ -97,6 +96,9 @@ function Swipe(container, options) {
 
     if (options.continuous) slide(index+1);
     else if (index < slides.length - 1) slide(index+1);
+    else{
+      slide(0);
+    }
 
   }
 
@@ -217,7 +219,8 @@ function Swipe(container, options) {
   var interval;
 
   function begin() {
-
+    delay = options.auto || 0;
+    clearTimeout(interval);
     interval = setTimeout(next, delay);
 
   }
@@ -487,6 +490,10 @@ function Swipe(container, options) {
 
       prev();
 
+    },
+    begin:function(){
+      stop();
+      begin();
     },
     next: function() {
 
